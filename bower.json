@@ -25,8 +25,5 @@
     "load",
     "pageload",
     "loading"
-  ],
-  "devDependencies": {
-    "backbone": "^1.2.3"
-  }
+  ]
 }

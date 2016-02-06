@@ -17,7 +17,6 @@ exports.config =
 	files:
 		javascripts:
 			joinTo:
-				'javascripts/vendor.js': /^(bower_components)/
 				'javascripts/truffle.pageload.js': /^(client)/
 
 				'../lib/truffle.pageload.js': /^(client)/
