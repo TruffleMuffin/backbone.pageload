@@ -1,0 +1,39 @@
+{
+	"name": "backbone.pageload",
+	"version": "1.0.0",
+	"authors": [
+		"https://github.com/TruffleMuffin"
+	],
+	"main": [
+		"lib/backbone.pageload.js"
+	],
+	"license": "MIT",
+	"ignore": [
+		"client",
+		".gitignore",
+		"*.json",
+		"*.coffee",
+		"node_modules",
+		"bower_components",
+		"public",
+		"server",
+		"test"
+	],
+	"keywords":[
+		"backbone",
+		"page",
+		"load",
+		"pageload",
+		"loading"
+	],
+	"dependencies": {
+		"backbone": ">= 1.0.0",
+		"jquery": ">= 1.10.2",
+		"underscore": ">= 1.8.3"
+	},
+	"overrides": {
+		"lodash": {
+			"main": "dist/lodash.underscore.js"
+		}
+	}
+}
