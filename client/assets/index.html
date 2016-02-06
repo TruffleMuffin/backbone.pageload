@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en" xml:lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en" xml:lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9" lang="en" xml:lang="en"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10 ie9" lang="en" xml:lang="en"> <![endif]-->
+<!--[if IE]><html class="no-js ie" lang="en" xml:lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en" xml:lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Truffle.Pageload Demonstration App</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+	<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="/javascripts/truffle.pageload.js"></script>
+	<script type="text/javascript">
+		var pageLoader = new (require('truffle.pageload/application'));
+		pageLoader.initialize({
+			callList: [
+				'/api/test',
+				'/api/settings',
+				'/api/settings/test'
+			],
+			done: function() { console.log('done'); },
+			progress: function(progress) { console.log(progress); }
+		});
+	</script>
+	<script type="text/javascript">
+	 $(function() {
+	 	// should be ignored
+		$.get('/api/nothing');
+		$.get('/api/random');
+
+		// The call list
+		$.get('/api/test');
+		$.get('/api/Settings');
+		$.get('/api/settings/test');
+
+		// Should be ignored
+		$.get('/api/etc');
+	 });
+	</script>
+</body>
+</html>
