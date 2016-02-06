@@ -1,6 +1,6 @@
-# backbone.pageload
+# truffle.pageload
 
-A simple page loading extension for backbone applications.
+A simple page loading extension for javascript applications.
 
 # Introduction
 

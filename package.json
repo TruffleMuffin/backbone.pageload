@@ -1,7 +1,7 @@
 {
-	"name": "backbone.pageload",
+	"name": "truffle.pageload",
 	"version": "1.0.0",
-	"description": "A simple page loading extension for backbone applications.",
+	"description": "A simple page loading extension for javascript applications.",
 	"scripts": {
 		"start": "brunch watch --server",
 		"build": "brunch build",

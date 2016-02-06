@@ -11,16 +11,16 @@ exports.config =
 
 	modules:
 		nameCleaner: (path) ->
-			path = path.replace /^client/, 'backbone.pageload'
+			path = path.replace /^client/, 'truffle.pageload'
 			path
 
 	files:
 		javascripts:
 			joinTo:
 				'javascripts/vendor.js': /^(bower_components)/
-				'javascripts/backbone.pageload.js': /^(client)/
+				'javascripts/truffle.pageload.js': /^(client)/
 
-				'../lib/backbone.pageload.js': /^(client)/
+				'../lib/truffle.pageload.js': /^(client)/
 
 				'test/javascripts/test.js': /^test/
 
