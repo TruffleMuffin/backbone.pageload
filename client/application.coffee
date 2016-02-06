@@ -52,7 +52,7 @@ module.exports = class Application
 	matchCall: (url) ->
 		match = false
 		for item in @configuration.callList
-			if url.match(item)?
+			if url.toLowerCase().match(item)?
 				match = true
 				break
 		match
