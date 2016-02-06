@@ -17,11 +17,29 @@
 	<script src="/javascripts/truffle.pageload.js"></script>
 	<script type="text/javascript">
 		var pageLoader = new (require('truffle.pageload/application'));
-		pageLoader.initialize({ value: 1 });
+		pageLoader.initialize({
+			callList: [
+				'/api/test',
+				'/api/settings',
+				'/api/settings/test'
+			],
+			done: function() { console.log('done'); },
+			progress: function(progress) { console.log(progress); }
+		});
 	</script>
 	<script type="text/javascript">
 	 $(function() {
+	 	// should be ignored
+		$.get('/api/nothing');
+		$.get('/api/random');
+
+		// The call list
+		$.get('/api/test');
 		$.get('/api/settings');
+		$.get('/api/settings/test');
+
+		// Should be ignored
+		$.get('/api/etc');
 	 });
 	</script>
 </body>

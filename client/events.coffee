@@ -1,15 +1,17 @@
 # A simple class to handle binding and triggering events, matches classic on/trigger specification.
 module.exports = class Events
 
-	constructor: ->
+	constructor: (context) ->
 		# Establish an object to keep track of all the events we are listening to
 		@listeners = {}
+		# Save the context to apply when using the callback, default to this
+		@context = context ? this
 
 	# Trigger the event with the arguments
 	trigger: (name, args) ->
 		if @listeners[name]?
 			for callback in @listeners[name]
-				callback.call this, args
+				callback.call @context, args
 
 	# Detach a listener
 	off: (name, callback) ->

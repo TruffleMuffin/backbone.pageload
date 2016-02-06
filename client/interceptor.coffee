@@ -9,7 +9,7 @@ module.exports = class Interceptor
 		@requests = {}
 		# Listen to all request:complete method and delete wrappers from @requests
 		@events.on 'request:complete', (options) =>
-			delete @requests[options.id]
+			delete @requests[options.id] if @requests
 
 	attach: ->
 		window.XMLHttpRequest = (options) =>
@@ -21,7 +21,10 @@ module.exports = class Interceptor
 			return request
 
 	detach: ->
-		XMLHttpRequest = Request
+		for wrapper of @requests
+			@requests[wrapper].destroy()
+		delete @requests
+		window.XMLHttpRequest = Request
 
 	replaceOpen: (request) ->
 		open = request.open
@@ -29,9 +32,7 @@ module.exports = class Interceptor
 			# Create a unique identifier for this request
 			id = method + url + '@' + (new Date()).getTime()
 			# Wrap the request and add it to the intercepted items
-			@requests[id] = new Wrapper({ id, @events, request})
-			# trigger the request start for the url
-			@events.trigger 'request:start', { url, method, id }
+			@requests[id] = new Wrapper({ id, url, @events, request })
 			# Actuall call the real open method
 			open.apply request, arguments
 
@@ -41,9 +42,14 @@ module.exports = class Interceptor
 			@request = options.request
 			@events = options.events
 			@id = options.id
+			@url = options.url
 
 			for name in ['load', 'abort', 'timeout', 'error']
 				@request.addEventListener name, @requestComplete
 
+		destroy: ->
+			for name in ['load', 'abort', 'timeout', 'error']
+				@request.removeEventListener name, @requestComplete
+
 		requestComplete: =>
-			@events.trigger 'request:complete', { @id }
+			@events.trigger 'request:complete', { @id, @url }
