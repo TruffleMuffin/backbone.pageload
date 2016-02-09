@@ -73,6 +73,10 @@ module.exports = class Application
 		# Calculate the progress based on the tracking information
 		progress = 0
 
+		# Fix the total requests count if it looks to be broken
+		if @tracking.startedRequests > @tracking.totalRequests
+			@tracking.totalRequests = @tracking.startedRequests
+
 		# A request has a start and complete update, give each function equal priority
 		if @tracking.startedRequests > 0
 			progress += Math.round(((@tracking.startedRequests / @tracking.totalRequests) * 100) / 2)

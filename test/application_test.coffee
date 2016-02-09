@@ -185,6 +185,23 @@ describe 'truffle.pageload/application', ->
 				sut.updateTracking()
 				sut.done.should.have.been.called
 
+		describe 'when the tracking has gone out of whack from a bad call list', ->
+
+			beforeEach ->
+				sut.tracking =
+					totalRequests: 2
+					completedRequests: 2
+					startedRequests: 3
+
+			it 'should call progress with the correct value', ->
+				sut.updateTracking()
+				sut.configuration.progress.should.have.been.calledWith 83
+
+			it 'should call progress with the correct value', ->
+				sut.tracking.completedRequests = 3
+				sut.updateTracking()
+				sut.configuration.progress.should.have.been.calledWith 100
+
 	describe 'done', ->
 
 		beforeEach ->
@@ -224,4 +241,3 @@ describe 'truffle.pageload/application', ->
 		it 'should return do a case insensitive match', ->
 			result = sut.matchCall 'teSt'
 			result.should.equal true
-
