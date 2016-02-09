@@ -27,7 +27,7 @@ Include the library as early as possible in the page, then initialize the librar
 
 # History
 
-## patch
+## 1.0.2
 * Fixing badly calculated percentage issues
 
 ## 1.0.1
