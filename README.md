@@ -27,5 +27,8 @@ Include the library as early as possible in the page, then initialize the librar
 
 # History
 
+## patch
+* Supporting open and close progress updates for more interactive results
+
 ## 1.0.0
 * Supporting watching for known ajax requests and binding to configurable element updating
