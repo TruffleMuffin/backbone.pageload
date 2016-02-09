@@ -27,6 +27,9 @@ Include the library as early as possible in the page, then initialize the librar
 
 # History
 
+## 1.0.2
+* Fixing badly calculated percentage issues
+
 ## 1.0.1
 * Supporting open and close progress updates for more interactive results
 * Fixing support in browsers without require features
