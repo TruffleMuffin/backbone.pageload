@@ -14,12 +14,32 @@ describe 'truffle.pageload/application', ->
 
 		describe 'when all features are not supported', ->
 
+			done = null
+
 			beforeEach ->
+				done = sinon.stub()
 				sinon.stub sut, 'supportedFeatures', -> false
 
-			it 'should not create a configuration element', ->
+			it 'should create a configuration element', ->
+				sut.initialize({ done })
+				expect(sut.configuration).to.exist
+				sut.configuration.callList.should.not.equal callList
+
+			it 'should call the done function', ->
+				sut.initialize({ done })
+				done.should.have.been.called
+
+			it 'should not create events', ->
 				sut.initialize()
-				expect(sut.configuration).to.not.exist
+				expect(sut.events).to.not.exist
+
+			it 'should not establish tracking data', ->
+				sut.initialize()
+				expect(sut.tracking).to.not.exist
+
+			it 'should not create the interceptor', ->
+				sut.initialize()
+				expect(sut.interceptor).to.not.exist
 
 		describe 'when all features are supported', ->
 

@@ -8,13 +8,15 @@ module.exports = class Application
 
 	# Place all appropriate configuration information onto this instance
 	initialize: (options = {}) ->
-		# Break out if the browser doesn't support the required features
-		return unless @supportedFeatures()
-
 		# Establish the correct configuration for this instance
 		@configuration = @_defaultConfiguration()
 		for name, property of options
 			@configuration[name] = property
+
+		# Break out if the browser doesn't support the required features
+		if not @supportedFeatures()
+			@configuration.done()
+			return
 
 		# Create the events instance we will use here
 		@events = new (require './events')(this)
