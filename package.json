@@ -1,6 +1,6 @@
 {
 	"name": "truffle.pageload",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "A simple page loading extension for javascript applications.",
 	"scripts": {
 		"start": "brunch watch --server",
