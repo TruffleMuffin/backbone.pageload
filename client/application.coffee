@@ -8,6 +8,9 @@ module.exports = class Application
 
 	# Place all appropriate configuration information onto this instance
 	initialize: (options = {}) ->
+		# Break out if the browser doesn't support the required features
+		return unless @supportedFeatures()
+
 		# Establish the correct configuration for this instance
 		@configuration = @_defaultConfiguration()
 		for name, property of options
@@ -30,6 +33,17 @@ module.exports = class Application
 		@interceptor = new (require './interceptor')({ @events })
 		# Attach the interceptor
 		@interceptor.attach()
+
+	# Validate that the browser features required to execute this application are present
+	supportedFeatures: ->
+		# We require the XMLHttpRequest constructor to exists
+		return false unless XMLHttpRequest?
+
+		# We also need addEventListener and removeEventListener to exist on its prototype
+		return false unless XMLHttpRequest.prototype.addEventListener?
+		return false unless XMLHttpRequest.prototype.removeEventListener?
+
+		return true
 
 	requestStart: (options) ->
 		@open() if @matchCall options.url

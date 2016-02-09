@@ -12,26 +12,40 @@ describe 'truffle.pageload/application', ->
 		beforeEach ->
 			callList = [ 'test' ]
 
-		it 'should create a configuration element', ->
-			sut.initialize()
-			expect(sut.configuration).to.exist
-			sut.configuration.callList.should.not.equal callList
+		describe 'when all features are not supported', ->
 
-		it 'should override provided properties on the configuration element', ->
-			sut.initialize({ callList })
-			sut.configuration.callList.should.equal callList
+			beforeEach ->
+				sinon.stub sut, 'supportedFeatures', -> false
 
-		it 'should create events', ->
-			sut.initialize()
-			expect(sut.events).to.exist
+			it 'should not create a configuration element', ->
+				sut.initialize()
+				expect(sut.configuration).to.not.exist
 
-		it 'should establish tracking data', ->
-			sut.initialize()
-			expect(sut.tracking).to.exist
+		describe 'when all features are supported', ->
 
-		it 'should create the interceptor', ->
-			sut.initialize()
-			expect(sut.interceptor).to.exist
+			beforeEach ->
+				sinon.stub sut, 'supportedFeatures', -> true
+
+			it 'should create a configuration element', ->
+				sut.initialize()
+				expect(sut.configuration).to.exist
+				sut.configuration.callList.should.not.equal callList
+
+			it 'should override provided properties on the configuration element', ->
+				sut.initialize({ callList })
+				sut.configuration.callList.should.equal callList
+
+			it 'should create events', ->
+				sut.initialize()
+				expect(sut.events).to.exist
+
+			it 'should establish tracking data', ->
+				sut.initialize()
+				expect(sut.tracking).to.exist
+
+			it 'should create the interceptor', ->
+				sut.initialize()
+				expect(sut.interceptor).to.exist
 
 	describe 'requestStart', ->
 

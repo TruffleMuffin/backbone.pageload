@@ -29,6 +29,7 @@ Include the library as early as possible in the page, then initialize the librar
 
 ## patch
 * Supporting open and close progress updates for more interactive results
+* Fixing support in browsers without require features
 
 ## 1.0.0
 * Supporting watching for known ajax requests and binding to configurable element updating
