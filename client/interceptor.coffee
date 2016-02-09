@@ -33,6 +33,8 @@ module.exports = class Interceptor
 			id = method + url + '@' + (new Date()).getTime()
 			# Wrap the request and add it to the intercepted items
 			@requests[id] = new Wrapper({ id, url, @events, request })
+			# trigger the request start for the url
+			@events.trigger 'request:start', { url, id }
 			# Actuall call the real open method
 			open.apply request, arguments
 
